@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "832751717843",
+    "project_id": "to-doapp-pua",
+    "storage_bucket": "to-doapp-pua.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832751717843:android:244e65c6ece2219dbbb326",
+        "android_client_info": {
+          "package_name": "com.example.test1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeE-S5vfknuIqx82nt7E6LH61Fff7bnnI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
