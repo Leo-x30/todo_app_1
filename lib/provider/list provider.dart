@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test1/Model/task.dart';
 import 'package:test1/firebaseutilis.dart';
 
-class Listprovider extends ChangeNotifier {
+class Listprovider extends ChangeNotifier{
   List<Task> taskList = [];
   var selectDate = DateTime.now();
 
@@ -18,7 +18,7 @@ class Listprovider extends ChangeNotifier {
           selectDate.year == task.datetime.year;
     }).toList();
 
-    // Sort tasks from oldest to newest
+
     taskList.sort((a, b) => a.datetime.compareTo(b.datetime));
 
     notifyListeners();

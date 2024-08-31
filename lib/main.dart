@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test1/Home/authentiction/register/register%20screen.dart';
 import 'package:test1/Home/home%20screen.dart';
 import 'package:test1/Home/mytheme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -36,10 +37,11 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     var provider =Provider.of<Appconfigprovider>(context);
     return MaterialApp(
-    debugShowCheckedModeBanner: true,
+    debugShowCheckedModeBanner: false,
      initialRoute: HomeScreen.routName,
      routes:{
       HomeScreen.routName : (context) => HomeScreen(),
+       RegisterScreen.routename:(context) => RegisterScreen()
       },
       theme: Mytheme.lighttheme,
       darkTheme: Mytheme.darktheme,

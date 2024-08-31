@@ -6,6 +6,7 @@ import 'package:test1/Model/task.dart';
 import 'package:test1/firebaseutilis.dart';
 import 'package:test1/provider/list%20provider.dart';
 
+
 class TaskListItem extends StatefulWidget {
   final Task task;
   TaskListItem({required this.task});
@@ -16,6 +17,13 @@ class TaskListItem extends StatefulWidget {
 
 class _TaskListItemState extends State<TaskListItem> {
   bool isChecked = false;
+  late Task task;
+
+  @override
+  void initState() {
+    super.initState();
+    task = widget.task;
+  }
 
   void editTaskDialog(BuildContext context) {
     final TextEditingController titleController = TextEditingController(text: widget.task.title);
@@ -113,7 +121,7 @@ class _TaskListItemState extends State<TaskListItem> {
         child: Row(
           children: [
             Container(
-              color: isChecked
+              color: task.isDone
                   ? Colors.green
                   : Appcolors.primarycolor,
               height: MediaQuery.of(context).size.height * 0.1,
@@ -132,7 +140,7 @@ class _TaskListItemState extends State<TaskListItem> {
                         widget.task.title,
                         style: TextStyle(
                           fontSize: 24,
-                          color: isChecked
+                          color: task.isDone
                               ? Colors.green
                               : Appcolors.primarycolor,
                           fontWeight: FontWeight.bold,
@@ -154,7 +162,7 @@ class _TaskListItemState extends State<TaskListItem> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               decoration: BoxDecoration(
-                color: isChecked
+                color: task.isDone
                     ? Colors.green
                     : Appcolors.primarycolor,
                 borderRadius: BorderRadius.circular(15),
@@ -162,7 +170,7 @@ class _TaskListItemState extends State<TaskListItem> {
               child: InkWell(
                 onTap: () {
                   setState(() {
-                    isChecked = !isChecked;
+                    task.isDone = !task.isDone;
                   });
                 },
                 child: Icon(
