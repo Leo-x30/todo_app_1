@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test1/Home/authentiction/login/loginscreen.dart';
 import 'package:test1/Home/authentiction/register/register%20screen.dart';
 import 'package:test1/Home/home%20screen.dart';
 import 'package:test1/Home/mytheme.dart';
@@ -38,10 +39,11 @@ class Myapp extends StatelessWidget {
     var provider =Provider.of<Appconfigprovider>(context);
     return MaterialApp(
     debugShowCheckedModeBanner: false,
-     initialRoute: HomeScreen.routName,
+     initialRoute: LoginScreen.routename,
      routes:{
       HomeScreen.routName : (context) => HomeScreen(),
-       RegisterScreen.routename:(context) => RegisterScreen()
+       RegisterScreen.routename:(context) => RegisterScreen(),
+       LoginScreen.routename:(context)=>LoginScreen()
       },
       theme: Mytheme.lighttheme,
       darkTheme: Mytheme.darktheme,

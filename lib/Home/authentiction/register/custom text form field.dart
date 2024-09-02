@@ -46,6 +46,7 @@ class CustomTextFormFiled extends StatelessWidget {
       color: Appcolors.primarycolor
      ),
     ),
+        errorMaxLines: 2
     ),
       controller: controller,
       keyboardType: keyboardType,
