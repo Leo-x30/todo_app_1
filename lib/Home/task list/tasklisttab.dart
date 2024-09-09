@@ -2,8 +2,6 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test1/Home/task%20list/tasklist%20item.dart';
-import 'package:test1/Model/task.dart';
-import 'package:test1/firebaseutilis.dart';
 import 'package:test1/provider/list%20provider.dart';
 
 class Tasklisttab extends StatefulWidget {

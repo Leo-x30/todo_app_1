@@ -6,7 +6,6 @@ import 'package:test1/Model/task.dart';
 import 'package:test1/firebaseutilis.dart';
 import 'package:test1/provider/list%20provider.dart';
 
-
 class TaskListItem extends StatefulWidget {
   final Task task;
   TaskListItem({required this.task});
@@ -60,8 +59,9 @@ class _TaskListItemState extends State<TaskListItem> {
                   widget.task.title = titleController.text;
                   widget.task.description = descriptionController.text;
                 });
-                FirebaseUtils.addtasktofirestore(widget.task);
-                Navigator.of(context).pop();
+                FirebaseUtils.updateTaskInFirestore(widget.task).then((_) {
+                  Navigator.of(context).pop();
+                });
               },
               child: Text('Save'),
             ),
@@ -82,11 +82,9 @@ class _TaskListItemState extends State<TaskListItem> {
         dismissible: DismissiblePane(
           onDismissed: () {
             FirebaseUtils.deleteTaskfromfireStore(widget.task).then((_) {
-              listprovider.taskList.removeWhere((task) => task.id == widget.task.id);
               setState(() {
+                listprovider.taskList.removeWhere((task) => task.id == widget.task.id);
               });
-            }).timeout(Duration(microseconds: 5), onTimeout: () {
-              print('task deleted');
               listprovider.getAlltasksfromfirestore();
             });
           },
@@ -96,12 +94,9 @@ class _TaskListItemState extends State<TaskListItem> {
             borderRadius: BorderRadius.circular(15),
             onPressed: (context) {
               FirebaseUtils.deleteTaskfromfireStore(widget.task).then((_) {
-                listprovider.taskList.removeWhere((task) => task.id == widget.task.id);
                 setState(() {
+                  listprovider.taskList.removeWhere((task) => task.id == widget.task.id);
                 });
-
-              }).timeout(Duration(microseconds: 5), onTimeout: () {
-                print('task deleted');
                 listprovider.getAlltasksfromfirestore();
               });
             },
@@ -121,9 +116,7 @@ class _TaskListItemState extends State<TaskListItem> {
         child: Row(
           children: [
             Container(
-              color: task.isDone
-                  ? Colors.green
-                  : Appcolors.primarycolor,
+              color: task.isDone ? Colors.green : Appcolors.primarycolor,
               height: MediaQuery.of(context).size.height * 0.1,
               width: 4,
             ),
@@ -140,9 +133,7 @@ class _TaskListItemState extends State<TaskListItem> {
                         widget.task.title,
                         style: TextStyle(
                           fontSize: 24,
-                          color: task.isDone
-                              ? Colors.green
-                              : Appcolors.primarycolor,
+                          color: task.isDone ? Colors.green : Appcolors.primarycolor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -162,9 +153,7 @@ class _TaskListItemState extends State<TaskListItem> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               decoration: BoxDecoration(
-                color: task.isDone
-                    ? Colors.green
-                    : Appcolors.primarycolor,
+                color: task.isDone ? Colors.green : Appcolors.primarycolor,
                 borderRadius: BorderRadius.circular(15),
               ),
               child: InkWell(

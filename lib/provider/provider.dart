@@ -6,15 +6,17 @@ class Appconfigprovider extends ChangeNotifier {
   ThemeMode apptheme = ThemeMode.light;
 
   Appconfigprovider() {
-    _loadThemeMode();
+    _loadPreferences();
   }
 
-  void changelanguage(String newlanguage) {
+  void changelanguage(String newlanguage) async {
     if (applanguage == newlanguage) {
       return;
     }
     applanguage = newlanguage;
     notifyListeners();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('language', newlanguage);
   }
 
   void changetheme(ThemeMode newMode) async {
@@ -27,12 +29,16 @@ class Appconfigprovider extends ChangeNotifier {
     prefs.setString('themeMode', newMode == ThemeMode.light ? 'light' : 'dark');
   }
 
-  void _loadThemeMode() async {
+  void _loadPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? themeMode = prefs.getString('themeMode');
     if (themeMode != null) {
       apptheme = themeMode == 'light' ? ThemeMode.light : ThemeMode.dark;
-      notifyListeners();
     }
+    String? language = prefs.getString('language');
+    if (language != null) {
+      applanguage = language;
+    }
+    notifyListeners();
   }
 }
