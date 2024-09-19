@@ -82,7 +82,7 @@ class _TaskListItemState extends State<TaskListItem> {
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(
           onDismissed: () {
-            // Remove the task from the provider immediately
+
             listprovider.removeTask(widget.task);
           },
         ),
@@ -90,7 +90,7 @@ class _TaskListItemState extends State<TaskListItem> {
           SlidableAction(
             borderRadius: BorderRadius.circular(15),
             onPressed: (context) {
-              // Remove the task from the provider immediately
+
               listprovider.removeTask(widget.task);
             },
             backgroundColor: Appcolors.redcolor,
