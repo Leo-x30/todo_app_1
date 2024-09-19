@@ -15,7 +15,6 @@ class TaskListItem extends StatefulWidget {
 }
 
 class _TaskListItemState extends State<TaskListItem> {
-  bool isChecked = false;
   late Task task;
 
   @override
@@ -25,8 +24,10 @@ class _TaskListItemState extends State<TaskListItem> {
   }
 
   void editTaskDialog(BuildContext context) {
-    final TextEditingController titleController = TextEditingController(text: widget.task.title);
-    final TextEditingController descriptionController = TextEditingController(text: widget.task.description);
+    final TextEditingController titleController =
+    TextEditingController(text: widget.task.title);
+    final TextEditingController descriptionController =
+    TextEditingController(text: widget.task.description);
 
     showDialog(
       context: context,
@@ -73,7 +74,7 @@ class _TaskListItemState extends State<TaskListItem> {
 
   @override
   Widget build(BuildContext context) {
-    var listprovider = Provider.of<Listprovider>(context);
+    var listprovider = Provider.of<Listprovider>(context, listen: false);
     return Slidable(
       key: ValueKey(widget.task.id),
       startActionPane: ActionPane(
@@ -81,24 +82,16 @@ class _TaskListItemState extends State<TaskListItem> {
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(
           onDismissed: () {
-            FirebaseUtils.deleteTaskfromfireStore(widget.task).then((_) {
-              setState(() {
-                listprovider.taskList.removeWhere((task) => task.id == widget.task.id);
-              });
-              listprovider.getAlltasksfromfirestore();
-            });
+            // Remove the task from the provider immediately
+            listprovider.removeTask(widget.task);
           },
         ),
         children: [
           SlidableAction(
             borderRadius: BorderRadius.circular(15),
             onPressed: (context) {
-              FirebaseUtils.deleteTaskfromfireStore(widget.task).then((_) {
-                setState(() {
-                  listprovider.taskList.removeWhere((task) => task.id == widget.task.id);
-                });
-                listprovider.getAlltasksfromfirestore();
-              });
+              // Remove the task from the provider immediately
+              listprovider.removeTask(widget.task);
             },
             backgroundColor: Appcolors.redcolor,
             foregroundColor: Appcolors.whitecolor,

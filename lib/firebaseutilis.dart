@@ -3,9 +3,10 @@ import 'package:test1/Model/task.dart';
 
 class FirebaseUtils {
   static CollectionReference<Task> gettaskscollection() {
-    return FirebaseFirestore.instance.collection(Task.collectionName)
+    return FirebaseFirestore.instance
+        .collection(Task.collectionName)
         .withConverter<Task>(
-      fromFirestore: ((snapshot, options) => Task.fromfirestore(snapshot.data()!)),
+      fromFirestore: (snapshot, options) => Task.fromfirestore(snapshot.data()!),
       toFirestore: (task, options) => task.tofirestore(),
     );
   }
@@ -21,7 +22,7 @@ class FirebaseUtils {
     return gettaskscollection().doc(task.id).update({
       'title': task.title,
       'description': task.description,
-      'datetime': task.datetime,
+      'datetime': task.datetime.millisecondsSinceEpoch,
       'isDone': task.isDone,
     });
   }

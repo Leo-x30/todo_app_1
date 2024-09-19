@@ -21,7 +21,7 @@ class _TasklisttabState extends State<Tasklisttab> {
         EasyDateTimeLine(
           initialDate: DateTime.now(),
           onDateChange: (selectedDate) {
-            listprovider.changselectDate(selectedDate);
+            listprovider.changeselectDate(selectedDate);
           },
           headerProps: const EasyHeaderProps(
             monthPickerType: MonthPickerType.switcher,
